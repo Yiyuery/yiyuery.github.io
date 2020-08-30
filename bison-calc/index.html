@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>基于WINDOWS下FLEX与BISON的计算器实现 | Yiyuery</title>
+    <meta name="generator" content="VuePress 1.5.4">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/favicon.ico">
+    <meta name="description" content="Yiyuery's 个人博客">
+    <link rel="preload" href="/assets/css/0.styles.fac40609.css" as="style"><link rel="preload" href="/assets/js/app.839ced15.js" as="script"><link rel="preload" href="/assets/js/4.3fbc1f96.js" as="script"><link rel="preload" href="/assets/js/29.7772d15e.js" as="script"><link rel="prefetch" href="/assets/js/1.43a347b2.js"><link rel="prefetch" href="/assets/js/10.9753ee5d.js"><link rel="prefetch" href="/assets/js/11.96c59566.js"><link rel="prefetch" href="/assets/js/12.2c50efec.js"><link rel="prefetch" href="/assets/js/13.5d6e55a8.js"><link rel="prefetch" href="/assets/js/14.fc442e96.js"><link rel="prefetch" href="/assets/js/15.24339c79.js"><link rel="prefetch" href="/assets/js/16.1587d289.js"><link rel="prefetch" href="/assets/js/17.44142bfd.js"><link rel="prefetch" href="/assets/js/18.994bb200.js"><link rel="prefetch" href="/assets/js/19.ca759cda.js"><link rel="prefetch" href="/assets/js/2.52d476cc.js"><link rel="prefetch" href="/assets/js/20.979ad63c.js"><link rel="prefetch" href="/assets/js/21.fecc9d80.js"><link rel="prefetch" href="/assets/js/22.3e99d924.js"><link rel="prefetch" href="/assets/js/23.951d9b97.js"><link rel="prefetch" href="/assets/js/24.bad04352.js"><link rel="prefetch" href="/assets/js/25.ce195067.js"><link rel="prefetch" href="/assets/js/26.7b3581a7.js"><link rel="prefetch" href="/assets/js/27.efc77ae3.js"><link rel="prefetch" href="/assets/js/28.16eb2f91.js"><link rel="prefetch" href="/assets/js/30.3870d4d1.js"><link rel="prefetch" href="/assets/js/31.0f4cfbf5.js"><link rel="prefetch" href="/assets/js/32.29d81c04.js"><link rel="prefetch" href="/assets/js/33.28affd1f.js"><link rel="prefetch" href="/assets/js/34.d28c7114.js"><link rel="prefetch" href="/assets/js/35.d7bb0604.js"><link rel="prefetch" href="/assets/js/36.ebab3576.js"><link rel="prefetch" href="/assets/js/37.0eb5a00d.js"><link rel="prefetch" href="/assets/js/38.9db427c3.js"><link rel="prefetch" href="/assets/js/39.53ecfed9.js"><link rel="prefetch" href="/assets/js/40.b2df18d9.js"><link rel="prefetch" href="/assets/js/41.b6970575.js"><link rel="prefetch" href="/assets/js/42.5d438713.js"><link rel="prefetch" href="/assets/js/43.0f984b43.js"><link rel="prefetch" href="/assets/js/44.4a9567c2.js"><link rel="prefetch" href="/assets/js/45.e77b2e3a.js"><link rel="prefetch" href="/assets/js/46.db689d82.js"><link rel="prefetch" href="/assets/js/47.ca290c98.js"><link rel="prefetch" href="/assets/js/48.cc29300b.js"><link rel="prefetch" href="/assets/js/49.f43fa070.js"><link rel="prefetch" href="/assets/js/5.8663838d.js"><link rel="prefetch" href="/assets/js/50.5ac4404a.js"><link rel="prefetch" href="/assets/js/51.20121ae0.js"><link rel="prefetch" href="/assets/js/52.d225ba88.js"><link rel="prefetch" href="/assets/js/53.adeb5a3a.js"><link rel="prefetch" href="/assets/js/54.a4dc7855.js"><link rel="prefetch" href="/assets/js/55.4b88ddc7.js"><link rel="prefetch" href="/assets/js/56.a13331f5.js"><link rel="prefetch" href="/assets/js/57.885d087b.js"><link rel="prefetch" href="/assets/js/58.a3064fd9.js"><link rel="prefetch" href="/assets/js/59.7e0d1f6e.js"><link rel="prefetch" href="/assets/js/6.83d9063b.js"><link rel="prefetch" href="/assets/js/60.33d66471.js"><link rel="prefetch" href="/assets/js/61.d332eaa5.js"><link rel="prefetch" href="/assets/js/62.8eaf5a15.js"><link rel="prefetch" href="/assets/js/63.6e0c7f61.js"><link rel="prefetch" href="/assets/js/64.17534d3f.js"><link rel="prefetch" href="/assets/js/65.40d814d7.js"><link rel="prefetch" href="/assets/js/66.9279a738.js"><link rel="prefetch" href="/assets/js/67.5cdb9fd6.js"><link rel="prefetch" href="/assets/js/68.26c5c99d.js"><link rel="prefetch" href="/assets/js/69.d349f923.js"><link rel="prefetch" href="/assets/js/7.6cb83fee.js"><link rel="prefetch" href="/assets/js/8.d6104416.js"><link rel="prefetch" href="/assets/js/9.c85ef583.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.fac40609.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><!----> <div id="my-bg"></div> <header class="navbar my-nav"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/logoko.png" alt="Yiyuery" class="logo"> <span class="site-name can-hide">Yiyuery</span></a> <div class="links"><div class="color-picker"><a class="color-button">
+		切换
+	</a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">切换主题</h4> <ul class="color-mode-options"><li class="dark">暗</li><li class="auto active">自动</li><li class="light">亮</li></ul></div></div></div> <!----> <nav class="nav-links can-hide"><div class="nav-item"><a href="/blog/" class="nav-link">📃 文章</a></div><div class="nav-item"><a href="/zhuanlan/" class="nav-link">📰 专栏</a></div><div class="nav-item"><a href="/zone/" class="nav-link">🤪 动态</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">🔨 工具</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/guide/" class="nav-link">🚥 导航</a></li><li class="dropdown-item"><!----> <a href="/links/" class="nav-link">🔗 友链</a></li></ul></div></div> <!----></nav> <a href="https://github.com/Yiyuery/" target="_blank" class="can-hide" style="display: flex; align-items: center; margin-left: 10px;"><img src="/github.png" class="my-svg" style="width: 1.4rem; height: 1.4rem;"></a></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/blog/" class="nav-link">📃 文章</a></div><div class="nav-item"><a href="/zhuanlan/" class="nav-link">📰 专栏</a></div><div class="nav-item"><a href="/zone/" class="nav-link">🤪 动态</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">🔨 工具</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/guide/" class="nav-link">🚥 导航</a></li><li class="dropdown-item"><!----> <a href="/links/" class="nav-link">🔗 友链</a></li></ul></div></div> <!----></nav>  <!----> </aside> <div><main class="page need-zoom"> <div class="my-main"><div class="my-main-left"><div class="my-title-box"><h2>基于WINDOWS下FLEX与BISON的计算器实现</h2> <div class="my-title-info"><span id="/bison-calc/" data-flag-title="基于WINDOWS下FLEX与BISON的计算器实现" class="leancloud-visitors"><span>作者：玉川</span>  
+            <span>2020 年 1 月 10 日  </span> <i class="el-icon-view" style="margin-right: 3px;"></i> <span class="leancloud-visitors-count"></span></span></div></div> <div class="theme-default-content content__default"><p>之前咱们所设计的语法分析器是使用C++自己编写的，尽管我们只是实现了一个简单的功能，但是还是费了九牛二虎之力，那么这一节，我们就开始使用Bison工具快速为我们创建一个功能强啊的语法分析器，话不多说，各位同学往下看吧！</p> <p><strong>软件及可参考资源</strong></p> <p><a href="https://cs.nju.edu.cn/daixinyu/1006.pdf" target="_blank" rel="noopener noreferrer">南京大学-词法分析和语法分析课件<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p><a href="https://sourceforge.net/projects/winflexbison/" target="_blank" rel="noopener noreferrer">windows平台下flex和Bison下载地址<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <h2 id="_1-题目描述"><a href="#_1-题目描述" class="header-anchor">#</a> 1. 题目描述</h2> <p>基于词法分析程序自动构造工具Flex与语法分析程序自动构造工具Bison，编制简单的计算器程序。</p> <p>参考示例程序, 用Flex和Bison实现一个功能更为强大的计算器，尽可能多的包含以下运算（支持浮点数）：</p> <ul><li>加、减、乘、除运算</li> <li>乘方power、开方sqrt运算</li> <li>三角函数运算 – sin、cos...</li> <li>求阶乘</li> <li>求log以10为底的对数</li></ul> <h3 id="题目分析"><a href="#题目分析" class="header-anchor">#</a> 题目分析</h3> <p>题目看起来还挺复杂的，而且还用到了没接触过的Bison工具。关于Bison的用法和语法可以参考上面的南京大学的课件里面的内容，比我讲的要好得多。那么下面的内容就是假设你已经知道了Bison的用法了。</p> <p>为了使用Bison的语法分析，我们首先要有一个词法分析器，这是就改造我们之前使用Flex创建的词法分析器吧。这里顺便提一下语法分析的过程，首先我们把词法分析的代码写在以<code>.y</code>结尾的文件里面，然后编译会生成<code>.tab.h</code>的文件，然后把这个文件在<code>.l</code>文件里面包含进去，然后使用flex编译生成<code>lex.yy.c</code>文件，这个文件就是最后的语法分析器。</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token operator">%</span>option noyywrap
+<span class="token operator">%</span><span class="token punctuation">{</span>
+<span class="token macro property"><span class="token directive-hash">#</span> <span class="token directive keyword">include</span><span class="token string">&quot;calc.tab.h&quot;</span></span>
+<span class="token operator">%</span><span class="token punctuation">}</span>
+
+DIGIT <span class="token punctuation">[</span><span class="token number">0</span><span class="token operator">-</span><span class="token number">9</span><span class="token punctuation">]</span><span class="token operator">+</span>
+FLOAT <span class="token punctuation">{</span>DIGIT<span class="token punctuation">}</span><span class="token punctuation">[</span><span class="token punctuation">.</span><span class="token punctuation">]</span><span class="token punctuation">{</span>DIGIT<span class="token punctuation">}</span>
+
+<span class="token operator">%</span><span class="token operator">%</span>
+<span class="token string">&quot;+&quot;</span>  <span class="token punctuation">{</span> <span class="token keyword">return</span> ADD<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token string">&quot;-&quot;</span>   <span class="token punctuation">{</span> <span class="token keyword">return</span> SUB<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token string">&quot;*&quot;</span>  <span class="token punctuation">{</span> <span class="token keyword">return</span> MUL<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token string">&quot;/&quot;</span>   <span class="token punctuation">{</span> <span class="token keyword">return</span> DIV<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token string">&quot;(&quot;</span>     <span class="token punctuation">{</span> <span class="token keyword">return</span> OP<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token string">&quot;)&quot;</span>     <span class="token punctuation">{</span> <span class="token keyword">return</span> CP<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token string">&quot;,&quot;</span>     <span class="token punctuation">{</span> <span class="token keyword">return</span> CO<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token string">&quot;!&quot;</span>     <span class="token punctuation">{</span> <span class="token keyword">return</span> DEG<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+<span class="token punctuation">{</span>DIGIT<span class="token punctuation">}</span> <span class="token punctuation">{</span> yylval <span class="token operator">=</span> <span class="token punctuation">(</span>YYSTYPE<span class="token punctuation">)</span><span class="token function">atoi</span><span class="token punctuation">(</span>yytext<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token keyword">return</span> NUMBER<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">{</span>FLOAT<span class="token punctuation">}</span> <span class="token punctuation">{</span> yylval <span class="token operator">=</span> <span class="token punctuation">(</span>YYSTYPE<span class="token punctuation">)</span><span class="token function">atof</span><span class="token punctuation">(</span>yytext<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token keyword">return</span> FLOAT<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+<span class="token string">&quot;pow&quot;</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> POW<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token string">&quot;sqrt&quot;</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> SQRT<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token string">&quot;sin&quot;</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> SIN<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token string">&quot;cos&quot;</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> COS<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token string">&quot;log&quot;</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> LOG<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+<span class="token string">&quot;//&quot;</span><span class="token punctuation">.</span><span class="token operator">*</span> 
+<span class="token punctuation">[</span> \t<span class="token punctuation">]</span>   <span class="token punctuation">{</span> <span class="token comment">/* ignore white space */</span> <span class="token punctuation">}</span>
+<span class="token punctuation">.</span>      <span class="token punctuation">{</span> <span class="token function">yyerror</span><span class="token punctuation">(</span><span class="token string">&quot;Mystery character&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token operator">%</span><span class="token operator">%</span>
+</code></pre></div><h2 id="_2-实现方法"><a href="#_2-实现方法" class="header-anchor">#</a> 2. 实现方法</h2> <p>首先是我们要实现计算器程序的文法，文法实现之后就是这个样子：</p> <div class="language- extra-class"><pre class="language-text"><code>calclist: /*nothing */ 
+ | calclist exp { printf(&quot;%g&quot;, $2); return 0;}
+ ;
+exp: factor
+ | exp ADD exp { $$ = $1 + $3; }
+ | exp SUB factor { $$ = $1 - $3; }
+ ;
+ 
+factor: term
+ | factor MUL term { $$ = $1 * $3; }
+ | factor DIV term { $$ = $1 / $3; }
+ ;
+ 
+term: NUMBER { $$ = $1;}
+ | FLOAT { $$ = $1;}
+ | term DEG { $$ = deg($1);}
+ | OP exp CP { $$ = $2; }
+ | SQRT OP term CP { $$ = sqrt($3); }	// sqrt(term)
+ | LOG OP term CP { $$ = log10($3); }	// log(term)
+ | SIN OP term CP { $$ = sin($3 / 180 * PI); }	// sin(term)
+ | COS OP term CP { $$ = cos($3 / 180 * PI); }	// cos(term)
+ | OP exp CP OP exp CP { $$ = $2 * $5; }	// (exp)(exp)
+ | POW OP term CO term CP { $$ = pow($3, $5); }	// pow(term, term)
+ ;
+</code></pre></div><p>应该容易看懂吧，关键就是在文法的部分。剩下的也没有什么可说的，主要是最后面在实现阶乘的时候需要使用递归，所以写了一个递归函数在后面。</p> <h2 id="_3-代码总览"><a href="#_3-代码总览" class="header-anchor">#</a> 3. 代码总览</h2> <blockquote><p>calc.y</p></blockquote> <div class="language-y extra-class"><pre class="language-text"><code>%{
+# include &lt;stdio.h&gt;
+# include &lt;stdlib.h&gt;
+# include &lt;math.h&gt;
+# define YYSTYPE float
+# define PI acos(-1)
+int yylex();
+int yyerror();
+float deg(int n);
+%}
+
+%token NUMBER FLOAT
+%token ADD SUB MUL DIV ABS
+%token OP CP CO EOL
+%token POW SQRT LOG SIN COS DEG
+
+%%
+ 
+calclist: /*nothing */ 
+ | calclist exp { printf(&quot;%g&quot;, $2); return 0;}
+ ;
+exp: factor
+ | exp ADD exp { $$ = $1 + $3; }
+ | exp SUB factor { $$ = $1 - $3; }
+ ;
+ 
+factor: term
+ | factor MUL term { $$ = $1 * $3; }
+ | factor DIV term { $$ = $1 / $3; }
+ ;
+ 
+term: NUMBER { $$ = $1;}
+ | FLOAT { $$ = $1;}
+ | term DEG { $$ = deg($1);}
+ | OP exp CP { $$ = $2; }
+ | SQRT OP term CP { $$ = sqrt($3); }
+ | LOG OP term CP { $$ = log10($3); }
+ | SIN OP term CP { $$ = sin($3 / 180 * PI); }
+ | COS OP term CP { $$ = cos($3 / 180 * PI); }
+ | OP exp CP OP exp CP { $$ = $2 * $5; }
+ | POW OP term CO term CP { $$ = pow($3, $5); }
+ ;
+%%
+
+float deg(int n) {
+  if (n == 1) {
+    return 1;
+  } else {
+    return n * deg(n-1);
+  }
+}
+
+int main() {
+  yyparse();
+}
+ 
+int yyerror(char *s) {
+  fprintf(stderr, &quot;error: %s\n&quot;, s);
+}
+</code></pre></div><blockquote><p>calc.l</p></blockquote> <div class="language-l extra-class"><pre class="language-text"><code>%option noyywrap
+%{
+# include&quot;calc.tab.h&quot;
+%}
+
+DIGIT [0-9]+
+FLOAT {DIGIT}[.]{DIGIT}
+
+%%
+&quot;+&quot;  { return ADD; }
+&quot;-&quot;   { return SUB; }
+&quot;*&quot;  { return MUL; }
+&quot;/&quot;   { return DIV; }
+&quot;(&quot;     { return OP; }
+&quot;)&quot;     { return CP; }
+&quot;,&quot;     { return CO; }
+&quot;!&quot;     { return DEG; }
+
+{DIGIT} { yylval = (YYSTYPE)atoi(yytext); return NUMBER; }
+{FLOAT} { yylval = (YYSTYPE)atof(yytext); return FLOAT; }
+
+&quot;pow&quot; { return POW; }
+&quot;sqrt&quot; { return SQRT; }
+&quot;sin&quot; { return SIN; }
+&quot;cos&quot; { return COS; }
+&quot;log&quot; { return LOG; }
+
+&quot;//&quot;.* 
+[ \t]   { /* ignore white space */ }
+.      { yyerror(&quot;Mystery character&quot;); }
+%%
+</code></pre></div></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">修改于:</span> <span class="time">8/30/2020, 4:06:23 PM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+            ←
+            <a href="/parsing-in-LR-table/" class="prev">基于LR分析表编写语法分析器</a></span> <!----></p></div> <div data-v-7cfe0aba><section class="page-edit" data-v-7cfe0aba><div id="vcomments" data-v-7cfe0aba></div></section></div></div> <div class="my-main-right"><div style="font-size:14px"><a href="https://me.csdn.net/jaykm" target="_blank">CSDN</a>    
+        <a href="https://github.com/Yiyuery" target="_blank">GitHub</a>   
+        <a href="https://juejin.im/user/5c17f022f265da616c65862f" target="_blank">掘金</a>   
+        <a href="mailto:xiazhaoyang@live.com">邮件</a></div> <div class="my-menu"><h4 style="margin-top: 0;">目录</h4> <a href="/bison-calc/#_1-题目描述" class="my-menu__lv2">1. 题目描述</a><a href="/bison-calc/#题目分析" class="my-menu__lv3">题目分析</a><a href="/bison-calc/#_2-实现方法" class="my-menu__lv2">2. 实现方法</a><a href="/bison-calc/#_3-代码总览" class="my-menu__lv2">3. 代码总览</a></div></div></div> </main></div> <div class="footer">
+    © 2019-2020 ❤️ Yiyuery<br> <a href="http://www.beian.miit.gov.cn" target="_blank">皖 ICP 备 19016269 号</a><br> <a href="https://me.csdn.net/jaykm" target="_blank">CSDN</a>    
+    <a href="https://github.com/Xerrors" target="_blank">GitHub</a>   
+    <a href="https://juejin.im/user/5c17f022f265da616c65862f" target="_blank">掘金</a><br> <a href="mailto:xiazhaoyang@live.com">发送邮件</a></div></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.839ced15.js" defer></script><script src="/assets/js/4.3fbc1f96.js" defer></script><script src="/assets/js/29.7772d15e.js" defer></script>
+  </body>
+</html>

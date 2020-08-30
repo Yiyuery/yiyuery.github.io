@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>单道处理系统的作业调度模拟程序 | Yiyuery</title>
+    <meta name="generator" content="VuePress 1.5.4">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/favicon.ico">
+    <meta name="description" content="Yiyuery's 个人博客">
+    <link rel="preload" href="/assets/css/0.styles.fac40609.css" as="style"><link rel="preload" href="/assets/js/app.839ced15.js" as="script"><link rel="preload" href="/assets/js/4.3fbc1f96.js" as="script"><link rel="preload" href="/assets/js/33.28affd1f.js" as="script"><link rel="prefetch" href="/assets/js/1.43a347b2.js"><link rel="prefetch" href="/assets/js/10.9753ee5d.js"><link rel="prefetch" href="/assets/js/11.96c59566.js"><link rel="prefetch" href="/assets/js/12.2c50efec.js"><link rel="prefetch" href="/assets/js/13.5d6e55a8.js"><link rel="prefetch" href="/assets/js/14.fc442e96.js"><link rel="prefetch" href="/assets/js/15.24339c79.js"><link rel="prefetch" href="/assets/js/16.1587d289.js"><link rel="prefetch" href="/assets/js/17.44142bfd.js"><link rel="prefetch" href="/assets/js/18.994bb200.js"><link rel="prefetch" href="/assets/js/19.ca759cda.js"><link rel="prefetch" href="/assets/js/2.52d476cc.js"><link rel="prefetch" href="/assets/js/20.979ad63c.js"><link rel="prefetch" href="/assets/js/21.fecc9d80.js"><link rel="prefetch" href="/assets/js/22.3e99d924.js"><link rel="prefetch" href="/assets/js/23.951d9b97.js"><link rel="prefetch" href="/assets/js/24.bad04352.js"><link rel="prefetch" href="/assets/js/25.ce195067.js"><link rel="prefetch" href="/assets/js/26.7b3581a7.js"><link rel="prefetch" href="/assets/js/27.efc77ae3.js"><link rel="prefetch" href="/assets/js/28.16eb2f91.js"><link rel="prefetch" href="/assets/js/29.7772d15e.js"><link rel="prefetch" href="/assets/js/30.3870d4d1.js"><link rel="prefetch" href="/assets/js/31.0f4cfbf5.js"><link rel="prefetch" href="/assets/js/32.29d81c04.js"><link rel="prefetch" href="/assets/js/34.d28c7114.js"><link rel="prefetch" href="/assets/js/35.d7bb0604.js"><link rel="prefetch" href="/assets/js/36.ebab3576.js"><link rel="prefetch" href="/assets/js/37.0eb5a00d.js"><link rel="prefetch" href="/assets/js/38.9db427c3.js"><link rel="prefetch" href="/assets/js/39.53ecfed9.js"><link rel="prefetch" href="/assets/js/40.b2df18d9.js"><link rel="prefetch" href="/assets/js/41.b6970575.js"><link rel="prefetch" href="/assets/js/42.5d438713.js"><link rel="prefetch" href="/assets/js/43.0f984b43.js"><link rel="prefetch" href="/assets/js/44.4a9567c2.js"><link rel="prefetch" href="/assets/js/45.e77b2e3a.js"><link rel="prefetch" href="/assets/js/46.db689d82.js"><link rel="prefetch" href="/assets/js/47.ca290c98.js"><link rel="prefetch" href="/assets/js/48.cc29300b.js"><link rel="prefetch" href="/assets/js/49.f43fa070.js"><link rel="prefetch" href="/assets/js/5.8663838d.js"><link rel="prefetch" href="/assets/js/50.5ac4404a.js"><link rel="prefetch" href="/assets/js/51.20121ae0.js"><link rel="prefetch" href="/assets/js/52.d225ba88.js"><link rel="prefetch" href="/assets/js/53.adeb5a3a.js"><link rel="prefetch" href="/assets/js/54.a4dc7855.js"><link rel="prefetch" href="/assets/js/55.4b88ddc7.js"><link rel="prefetch" href="/assets/js/56.a13331f5.js"><link rel="prefetch" href="/assets/js/57.885d087b.js"><link rel="prefetch" href="/assets/js/58.a3064fd9.js"><link rel="prefetch" href="/assets/js/59.7e0d1f6e.js"><link rel="prefetch" href="/assets/js/6.83d9063b.js"><link rel="prefetch" href="/assets/js/60.33d66471.js"><link rel="prefetch" href="/assets/js/61.d332eaa5.js"><link rel="prefetch" href="/assets/js/62.8eaf5a15.js"><link rel="prefetch" href="/assets/js/63.6e0c7f61.js"><link rel="prefetch" href="/assets/js/64.17534d3f.js"><link rel="prefetch" href="/assets/js/65.40d814d7.js"><link rel="prefetch" href="/assets/js/66.9279a738.js"><link rel="prefetch" href="/assets/js/67.5cdb9fd6.js"><link rel="prefetch" href="/assets/js/68.26c5c99d.js"><link rel="prefetch" href="/assets/js/69.d349f923.js"><link rel="prefetch" href="/assets/js/7.6cb83fee.js"><link rel="prefetch" href="/assets/js/8.d6104416.js"><link rel="prefetch" href="/assets/js/9.c85ef583.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.fac40609.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><!----> <div id="my-bg"></div> <header class="navbar my-nav"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/logoko.png" alt="Yiyuery" class="logo"> <span class="site-name can-hide">Yiyuery</span></a> <div class="links"><div class="color-picker"><a class="color-button">
+		切换
+	</a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">切换主题</h4> <ul class="color-mode-options"><li class="dark">暗</li><li class="auto active">自动</li><li class="light">亮</li></ul></div></div></div> <!----> <nav class="nav-links can-hide"><div class="nav-item"><a href="/blog/" class="nav-link">📃 文章</a></div><div class="nav-item"><a href="/zhuanlan/" class="nav-link">📰 专栏</a></div><div class="nav-item"><a href="/zone/" class="nav-link">🤪 动态</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">🔨 工具</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/guide/" class="nav-link">🚥 导航</a></li><li class="dropdown-item"><!----> <a href="/links/" class="nav-link">🔗 友链</a></li></ul></div></div> <!----></nav> <a href="https://github.com/Yiyuery/" target="_blank" class="can-hide" style="display: flex; align-items: center; margin-left: 10px;"><img src="/github.png" class="my-svg" style="width: 1.4rem; height: 1.4rem;"></a></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/blog/" class="nav-link">📃 文章</a></div><div class="nav-item"><a href="/zhuanlan/" class="nav-link">📰 专栏</a></div><div class="nav-item"><a href="/zone/" class="nav-link">🤪 动态</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">🔨 工具</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/guide/" class="nav-link">🚥 导航</a></li><li class="dropdown-item"><!----> <a href="/links/" class="nav-link">🔗 友链</a></li></ul></div></div> <!----></nav>  <!----> </aside> <div><main class="page need-zoom"> <div class="my-main"><div class="my-main-left"><div class="my-title-box"><h2>单道处理系统的作业调度模拟程序</h2> <div class="my-title-info"><span id="/JobSchedulingProgram/" data-flag-title="单道处理系统的作业调度模拟程序" class="leancloud-visitors"><span>作者：玉川</span>  
+            <span>2020 年 5 月 21 日  </span> <i class="el-icon-view" style="margin-right: 3px;"></i> <span class="leancloud-visitors-count"></span></span></div></div> <div class="theme-default-content content__default"><p>我相信一个好的算法应该是优美的，不需要过多的解释，代码前后自成一体；这也是我向往的目标，不过从目前的情况来看，我还是需要努力的。</p> <p>这次的作业是「单道处理系统的作业调度模拟程序」要求实现 3 种作业调度算法：</p> <ul><li>先来先服务（FCFS）</li> <li>最短作业优先（SJF）</li> <li>响应比高者优先（HRRN）</li></ul> <p>对每种调度算法都要求打印每个作业开始运行时刻、完成时刻、周转时间、带权周转时间，以及这组作业的平均周转时间及带权平均周转时间，以比较各种算法的优缺点。</p> <h2 id="三种调度算法的原理"><a href="#三种调度算法的原理" class="header-anchor">#</a> 三种调度算法的原理</h2> <p>假设咱们学生就是一个「单道处理系统」（谦虚），当面对很多科作业到来的时候，有以下几种应对办法</p> <p><strong>FCFS 先来先服务</strong>：先布置的作业优先做，所有作业排好队，后来的作业放在最后面；</p> <p><strong>最短作业优先</strong>：哪个省事先做哪个，所有作业按照要花费的时间排成一个序列；</p> <p><strong>响应比高者优先</strong>：如果哪个先来先做哪个，可能导致比较紧急且简单的工作没法完成，比如老师让当堂交 3 道选择题，这推到后面是不合适的；如果使用最短作业优先呢？可能刚一开始留下的一个比较繁琐的任务一直没法做；比如说暑假开始了，你要准备学车，但是又想出去玩，又想打游戏，等到暑假结束，还是没去学车（亲身经历）；所以要综合考虑等待时间以及处理的时间开销。</p> <p>$$
+优先级 = \frac{等待的时间 + 需要花费的时间}  {需要花费的时间}
+$$</p> <h2 id="python-实现"><a href="#python-实现" class="header-anchor">#</a> Python 实现</h2> <h3 id="jcb-的数据结构"><a href="#jcb-的数据结构" class="header-anchor">#</a> JCB 的数据结构</h3> <p>每个作业由一个作业控制块JCB表示，JCB可以包含如下信息：作业名、提交时间、所需的运行时间、所需的资源、作业状态、链指针等等；所以最终的 JCB 类就直接创建出来了，千言万语不如直接看代码</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">class</span> <span class="token class-name">JCB</span><span class="token punctuation">:</span>
+    <span class="token comment"># 表示系统中的资源数量，其中 1 表示独占资源</span>
+    srcs <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span>
+    clock <span class="token operator">=</span> <span class="token number">0</span> <span class="token comment"># 类的时钟</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> name<span class="token punctuation">,</span> time<span class="token punctuation">,</span> srcs<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>name <span class="token operator">=</span> name     <span class="token comment"># 名称</span>
+        self<span class="token punctuation">.</span>time <span class="token operator">=</span> time     <span class="token comment"># 所需时间</span>
+        self<span class="token punctuation">.</span>status <span class="token operator">=</span> <span class="token string">'Wait'</span> <span class="token comment"># 作业的状态</span>
+        self<span class="token punctuation">.</span>commit_time <span class="token operator">=</span> JCB<span class="token punctuation">.</span>clock <span class="token comment"># 作业到达时间</span>
+
+        <span class="token comment"># 所需的资源，单道程序调度用不到的</span>
+        self<span class="token punctuation">.</span>srcs <span class="token operator">=</span> srcs <span class="token keyword">if</span> srcs <span class="token keyword">else</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token builtin">len</span><span class="token punctuation">(</span>JCB<span class="token punctuation">.</span>srcs<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>pointer <span class="token operator">=</span> <span class="token boolean">None</span>  <span class="token comment"># 链指针，不知道要用来干嘛</span>
+        self<span class="token punctuation">.</span>start_time <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token comment"># 作业开始执行的时间，未执行为 -1 </span>
+
+        self<span class="token punctuation">.</span>rp <span class="token operator">=</span> <span class="token number">0</span> <span class="token comment"># 优先级</span>
+
+        JCB<span class="token punctuation">.</span>clock <span class="token operator">+=</span> <span class="token number">1</span> <span class="token comment"># 类的时钟 +1</span>
+
+    <span class="token comment"># 计算优先级，越大优先级越高，越靠前</span>
+    <span class="token keyword">def</span> <span class="token function">calcRp</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> clock<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>start_time <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>rp <span class="token operator">=</span> <span class="token punctuation">(</span>clock <span class="token operator">-</span> self<span class="token punctuation">.</span>commit_time <span class="token operator">+</span> self<span class="token punctuation">.</span>time<span class="token punctuation">)</span> <span class="token operator">/</span> self<span class="token punctuation">.</span>time
+</code></pre></div><p>其中 <code>calcRp</code> 函数会根据「调度程序」当前的时间 <code>clock</code> 来计算该作业的优先级。</p> <h3 id="初始化-jcb"><a href="#初始化-jcb" class="header-anchor">#</a> 初始化 JCB</h3> <p>又是使用随机数生成作业；同样这次在创建数组的时候是使用了快速创建数组的方法：</p> <div class="language-python extra-class"><pre class="language-python"><code>a <span class="token operator">=</span> <span class="token punctuation">[</span>i <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">]</span>
+<span class="token comment"># 等同于</span>
+a <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    a<span class="token punctuation">.</span>append<span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+</code></pre></div><p>从上面的类中可以看到，必要的参数就两个，一个是名称，一个是完成作业所需的时间；作业的到达时间我们直接使用 JSB 类的属性 clock 直接赋值。</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token comment"># 初始化所有 JCB</span>
+<span class="token keyword">def</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># 先考虑单程序的情况，也就是不需要考虑资源的情况</span>
+    jsb_list <span class="token operator">=</span> <span class="token punctuation">[</span>JCB<span class="token punctuation">(</span><span class="token builtin">chr</span><span class="token punctuation">(</span><span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">'A'</span><span class="token punctuation">)</span> <span class="token operator">+</span> i<span class="token punctuation">)</span><span class="token punctuation">,</span> random<span class="token punctuation">.</span>randrange<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>random<span class="token punctuation">.</span>randrange<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+    <span class="token keyword">for</span> job <span class="token keyword">in</span> jsb_list<span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'名称：{}\t到达时间：{}\t所需时间：{}\t所需资源：{}'</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>
+            job<span class="token punctuation">.</span>name<span class="token punctuation">,</span>
+            job<span class="token punctuation">.</span>commit_time<span class="token punctuation">,</span>
+            job<span class="token punctuation">.</span>time<span class="token punctuation">,</span>
+            job<span class="token punctuation">.</span>srcs
+        <span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> jsb_list
+</code></pre></div><p>运行结果：</p> <div class="language- extra-class"><pre class="language-text"><code>名称：A 到达时间：0     所需时间：3     所需资源：[0, 0, 0, 0, 0, 0]
+名称：B 到达时间：1     所需时间：2     所需资源：[0, 0, 0, 0, 0, 0]
+名称：C 到达时间：2     所需时间：5     所需资源：[0, 0, 0, 0, 0, 0]
+名称：D 到达时间：3     所需时间：5     所需资源：[0, 0, 0, 0, 0, 0]
+名称：E 到达时间：4     所需时间：4     所需资源：[0, 0, 0, 0, 0, 0]
+名称：F 到达时间：5     所需时间：4     所需资源：[0, 0, 0, 0, 0, 0]
+名称：G 到达时间：6     所需时间：4     所需资源：[0, 0, 0, 0, 0, 0]
+名称：H 到达时间：7     所需时间：5     所需资源：[0, 0, 0, 0, 0, 0]
+</code></pre></div><h3 id="调度算法的实现"><a href="#调度算法的实现" class="header-anchor">#</a> 调度算法的实现</h3> <p>其实这三种算法的核心是一样的，只是对作业的「比较方法」不一样，也就是说，这三种算法可以使用同一个函数，只是在「初始化堆」的时候使用的比较函数是不一样的。</p> <p>所以定义两个函数，一个是实现算法的核心功能 func，另外一个函数是根据调度方法的不同提供不同的比较函数 <code>getLowerThan</code>：</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">def</span> <span class="token function">func</span><span class="token punctuation">(</span>jobs<span class="token punctuation">,</span> method<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    JCB<span class="token punctuation">.</span>__lt__ <span class="token operator">=</span> getLowerThan<span class="token punctuation">(</span>method<span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token comment"># 下面的内容先省略</span>
+    <span class="token keyword">return</span> <span class="token boolean">None</span>
+
+<span class="token keyword">def</span> <span class="token function">getLowerThan</span><span class="token punctuation">(</span>method<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># 我感觉这个函数写的很丑，但是又没啥好办法</span>
+    <span class="token keyword">def</span> <span class="token function">FCFS_lt</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> other<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>commit_time <span class="token operator">&lt;</span> other<span class="token punctuation">.</span>commit_time
+    <span class="token keyword">def</span> <span class="token function">SJF_lt</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> other<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>time <span class="token operator">&lt;</span> other<span class="token punctuation">.</span>time
+    <span class="token keyword">def</span> <span class="token function">HRRN_lt</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> other<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>rp <span class="token operator">&gt;</span> other<span class="token punctuation">.</span>rp
+
+    <span class="token keyword">if</span> method <span class="token operator">==</span> <span class="token string">'FCFS'</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> FCFS_lt
+    <span class="token keyword">elif</span> method <span class="token operator">==</span> <span class="token string">'SJF'</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> SJF_lt
+    <span class="token keyword">elif</span> method <span class="token operator">==</span> <span class="token string">'HRRN'</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> HRRN_lt
+</code></pre></div><p>我们把类 JCB 的「小于号」进行了运算符重构，所以我们在使用 <code>heapq.heapify(array)</code>的时候会调用重构的函数进行计算。</p> <p>那么最后，整个算法就差最核心的算法没提到了，下面是简化之后的代码，删除了一些对周转时间的计算以及输出，完整代码见文末；因为要考虑作业的到达情况，所以整个函数里面有两个序列，一个是完整的作业序列 <code>jobs</code>，当时钟 「clock」 到达某个作业的「到达时间」的时候，将这个作业从  <code>jobs</code> 放到 <code>jobs_heap</code> 里面：</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">def</span> <span class="token function">func</span><span class="token punctuation">(</span>jobs<span class="token punctuation">,</span> method<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    JCB<span class="token punctuation">.</span>__lt__ <span class="token operator">=</span> getLowerThan<span class="token punctuation">(</span>method<span class="token punctuation">)</span>
+
+    <span class="token comment"># 初始化，需要考虑作业的到达时间</span>
+    clock <span class="token operator">=</span> <span class="token number">0</span>
+    currentJob <span class="token operator">=</span> <span class="token boolean">None</span> <span class="token comment"># 当前任务</span>
+    jobs_heap <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+
+    <span class="token keyword">while</span> <span class="token builtin">len</span><span class="token punctuation">(</span>jobs<span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">0</span> <span class="token keyword">or</span> <span class="token builtin">len</span><span class="token punctuation">(</span>jobs_heap<span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">0</span> <span class="token keyword">or</span> currentJob<span class="token punctuation">.</span>status <span class="token operator">!=</span> <span class="token string">'Finish'</span><span class="token punctuation">:</span>
+        <span class="token comment"># 作业到达并入堆</span>
+        <span class="token keyword">while</span> <span class="token builtin">len</span><span class="token punctuation">(</span>jobs<span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">0</span> <span class="token keyword">and</span> clock <span class="token operator">==</span> jobs<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>commit_time<span class="token punctuation">:</span>
+            heapq<span class="token punctuation">.</span>heappush<span class="token punctuation">(</span>jobs_heap<span class="token punctuation">,</span> jobs<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+        <span class="token comment"># 计算优先级</span>
+        <span class="token keyword">if</span> method <span class="token operator">==</span> <span class="token string">'HRRN'</span><span class="token punctuation">:</span>
+            <span class="token keyword">for</span> i <span class="token keyword">in</span> jobs_heap<span class="token punctuation">:</span>
+                i<span class="token punctuation">.</span>calcRp<span class="token punctuation">(</span>clock<span class="token punctuation">)</span>
+        heapq<span class="token punctuation">.</span>heapify<span class="token punctuation">(</span>jobs_heap<span class="token punctuation">)</span>
+
+        <span class="token comment"># 判断当前是否有任务或者当前任务额是否已完成</span>
+        <span class="token keyword">if</span> <span class="token keyword">not</span> currentJob <span class="token keyword">or</span> currentJob<span class="token punctuation">.</span>status <span class="token operator">==</span> <span class="token string">'Finish'</span><span class="token punctuation">:</span>
+            currentJob <span class="token operator">=</span> heapq<span class="token punctuation">.</span>heappop<span class="token punctuation">(</span>jobs_heap<span class="token punctuation">)</span>
+            currentJob<span class="token punctuation">.</span>start_time <span class="token operator">=</span> clock
+
+        <span class="token comment"># 如果有任务，当前任务所需时间 - 1    </span>
+        currentJob<span class="token punctuation">.</span>time <span class="token operator">-=</span> <span class="token number">1</span>
+        clock <span class="token operator">+=</span> <span class="token number">1</span>
+
+        <span class="token comment"># 判断当前任务是否结束</span>
+        <span class="token keyword">if</span> currentJob<span class="token punctuation">.</span>time <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+            currentJob<span class="token punctuation">.</span>status <span class="token operator">=</span> <span class="token string">'Finish'</span>
+    <span class="token keyword">return</span> <span class="token boolean">None</span>
+</code></pre></div><p>需要注意的是入堆那部分代码，采用高响应优先的时候，需要根据当前时间实时计算优先级，所以每一次循环（时间片）都要重新计算优先级，然后变成优先队列。</p> <h2 id="完整代码以及参考资料"><a href="#完整代码以及参考资料" class="header-anchor">#</a> 完整代码以及参考资料</h2> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">import</span> random
+<span class="token keyword">import</span> heapq
+<span class="token keyword">import</span> copy
+
+<span class="token keyword">class</span> <span class="token class-name">JCB</span><span class="token punctuation">:</span>
+    <span class="token comment"># 表示系统中的资源数量，其中 1 表示独占资源</span>
+    srcs <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span>
+    clock <span class="token operator">=</span> <span class="token number">0</span> <span class="token comment"># 类的时钟</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> name<span class="token punctuation">,</span> time<span class="token punctuation">,</span> srcs<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>name <span class="token operator">=</span> name     <span class="token comment"># 名称</span>
+        self<span class="token punctuation">.</span>time <span class="token operator">=</span> time     <span class="token comment"># 所需时间</span>
+        self<span class="token punctuation">.</span>status <span class="token operator">=</span> <span class="token string">'Wait'</span> <span class="token comment"># 作业的状态</span>
+        self<span class="token punctuation">.</span>commit_time <span class="token operator">=</span> JCB<span class="token punctuation">.</span>clock <span class="token comment"># 作业到达时间</span>
+
+        <span class="token comment"># 所需的资源，单道程序调度用不到的</span>
+        self<span class="token punctuation">.</span>srcs <span class="token operator">=</span> srcs <span class="token keyword">if</span> srcs <span class="token keyword">else</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token builtin">len</span><span class="token punctuation">(</span>JCB<span class="token punctuation">.</span>srcs<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>pointer <span class="token operator">=</span> <span class="token boolean">None</span>  <span class="token comment"># 链指针，不知道要用来干嘛</span>
+        self<span class="token punctuation">.</span>start_time <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token comment"># 作业开始执行的时间，未执行为 -1 </span>
+
+        self<span class="token punctuation">.</span>rp <span class="token operator">=</span> <span class="token number">0</span> <span class="token comment"># 优先级</span>
+
+        JCB<span class="token punctuation">.</span>clock <span class="token operator">+=</span> <span class="token number">1</span> <span class="token comment"># 类的时钟 +1</span>
+
+    <span class="token comment"># 计算优先级，越大优先级越高，越靠前</span>
+    <span class="token keyword">def</span> <span class="token function">calcRp</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> clock<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>start_time <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>rp <span class="token operator">=</span> <span class="token punctuation">(</span>clock <span class="token operator">-</span> self<span class="token punctuation">.</span>commit_time <span class="token operator">+</span> self<span class="token punctuation">.</span>time<span class="token punctuation">)</span> <span class="token operator">/</span> self<span class="token punctuation">.</span>time
+
+
+<span class="token comment"># 初始化所有 JCB</span>
+<span class="token keyword">def</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># 先考虑单程序的情况，也就是不需要考虑资源的情况</span>
+    jsb_list <span class="token operator">=</span> <span class="token punctuation">[</span>JCB<span class="token punctuation">(</span><span class="token builtin">chr</span><span class="token punctuation">(</span><span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">'A'</span><span class="token punctuation">)</span> <span class="token operator">+</span> i<span class="token punctuation">)</span><span class="token punctuation">,</span> random<span class="token punctuation">.</span>randrange<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>random<span class="token punctuation">.</span>randrange<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+    <span class="token keyword">for</span> job <span class="token keyword">in</span> jsb_list<span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'名称：{}\t到达时间：{}\t所需时间：{}\t所需资源：{}'</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>
+            job<span class="token punctuation">.</span>name<span class="token punctuation">,</span>
+            job<span class="token punctuation">.</span>commit_time<span class="token punctuation">,</span>
+            job<span class="token punctuation">.</span>time<span class="token punctuation">,</span>
+            job<span class="token punctuation">.</span>srcs
+        <span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> jsb_list
+
+
+<span class="token keyword">def</span> <span class="token function">func</span><span class="token punctuation">(</span>jobs<span class="token punctuation">,</span> method<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    JCB<span class="token punctuation">.</span>__lt__ <span class="token operator">=</span> getLowerThan<span class="token punctuation">(</span>method<span class="token punctuation">)</span>
+    <span class="token comment"># 保存作业的数量用于计算平均周转时间</span>
+    job_count <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>jobs<span class="token punctuation">)</span>
+
+    <span class="token comment"># 初始化，需要考虑作业的到达时间</span>
+    clock <span class="token operator">=</span> <span class="token number">0</span>
+    currentJob <span class="token operator">=</span> <span class="token boolean">None</span> <span class="token comment"># 当前任务</span>
+    jobs_heap <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token comment"># 总周转时间以及带权周转时间</span>
+    turnover_time <span class="token operator">=</span> <span class="token number">0</span>
+    turnover_time_wei <span class="token operator">=</span> <span class="token number">0</span>
+
+    <span class="token keyword">while</span> <span class="token builtin">len</span><span class="token punctuation">(</span>jobs<span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">0</span> <span class="token keyword">or</span> <span class="token builtin">len</span><span class="token punctuation">(</span>jobs_heap<span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">0</span> <span class="token keyword">or</span> currentJob<span class="token punctuation">.</span>status <span class="token operator">!=</span> <span class="token string">'Finish'</span><span class="token punctuation">:</span>
+        <span class="token comment"># 作业到达并入堆</span>
+        <span class="token keyword">while</span> <span class="token builtin">len</span><span class="token punctuation">(</span>jobs<span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">0</span> <span class="token keyword">and</span> clock <span class="token operator">==</span> jobs<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>commit_time<span class="token punctuation">:</span>
+            heapq<span class="token punctuation">.</span>heappush<span class="token punctuation">(</span>jobs_heap<span class="token punctuation">,</span> jobs<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+        <span class="token comment"># 计算优先级</span>
+        <span class="token keyword">if</span> method <span class="token operator">==</span> <span class="token string">'HRRN'</span><span class="token punctuation">:</span>
+            <span class="token keyword">for</span> i <span class="token keyword">in</span> jobs_heap<span class="token punctuation">:</span>
+                i<span class="token punctuation">.</span>calcRp<span class="token punctuation">(</span>clock<span class="token punctuation">)</span>
+        heapq<span class="token punctuation">.</span>heapify<span class="token punctuation">(</span>jobs_heap<span class="token punctuation">)</span>
+
+        <span class="token comment"># 判断当前是否有任务</span>
+        <span class="token keyword">if</span> <span class="token keyword">not</span> currentJob <span class="token keyword">or</span> currentJob<span class="token punctuation">.</span>status <span class="token operator">==</span> <span class="token string">'Finish'</span><span class="token punctuation">:</span>
+            currentJob <span class="token operator">=</span> heapq<span class="token punctuation">.</span>heappop<span class="token punctuation">(</span>jobs_heap<span class="token punctuation">)</span>
+            currentJob<span class="token punctuation">.</span>start_time <span class="token operator">=</span> clock
+
+        currentJob<span class="token punctuation">.</span>time <span class="token operator">-=</span> <span class="token number">1</span>
+        clock <span class="token operator">+=</span> <span class="token number">1</span>
+
+        <span class="token comment"># 如果有任务，当前任务所需时间 - 1</span>
+        <span class="token comment"># 判断当前任务是否结束</span>
+        <span class="token keyword">if</span> currentJob<span class="token punctuation">.</span>time <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+            <span class="token comment"># 计算周转时间</span>
+            cur_turnovertime <span class="token operator">=</span> clock <span class="token operator">-</span> currentJob<span class="token punctuation">.</span>commit_time
+            <span class="token comment"># 计算带权周转时间</span>
+            cur_turnovertime_wei <span class="token operator">=</span> cur_turnovertime <span class="token operator">/</span> <span class="token punctuation">(</span>clock <span class="token operator">-</span> currentJob<span class="token punctuation">.</span>start_time<span class="token punctuation">)</span>
+            <span class="token comment"># 修改状态为完成状态</span>
+            currentJob<span class="token punctuation">.</span>status <span class="token operator">=</span> <span class="token string">'Finish'</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'作业{}运行时间：{}\t完成时间：{}\t周转时间：{}\t带权周转时间{:.4f}'</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>
+                currentJob<span class="token punctuation">.</span>name<span class="token punctuation">,</span>
+                clock <span class="token operator">-</span> currentJob<span class="token punctuation">.</span>start_time<span class="token punctuation">,</span>
+                clock<span class="token punctuation">,</span>
+                cur_turnovertime<span class="token punctuation">,</span>
+                cur_turnovertime_wei<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            turnover_time <span class="token operator">+=</span> cur_turnovertime
+            turnover_time_wei <span class="token operator">+=</span> cur_turnovertime_wei
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'{} 的平均周转时间为：{:.3f}\t带权平均周转时间：{:.3f}\n'</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>
+        method<span class="token punctuation">,</span>
+        turnover_time <span class="token operator">/</span> job_count<span class="token punctuation">,</span>
+        turnover_time_wei <span class="token operator">/</span> job_count<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> <span class="token boolean">None</span>
+
+
+<span class="token keyword">def</span> <span class="token function">getLowerThan</span><span class="token punctuation">(</span>method<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">FCFS_lt</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> other<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>commit_time <span class="token operator">&lt;</span> other<span class="token punctuation">.</span>commit_time
+    <span class="token keyword">def</span> <span class="token function">SJF_lt</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> other<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>time <span class="token operator">&lt;</span> other<span class="token punctuation">.</span>time
+    <span class="token keyword">def</span> <span class="token function">HRRN_lt</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> other<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>rp <span class="token operator">&gt;</span> other<span class="token punctuation">.</span>rp
+
+    <span class="token keyword">if</span> method <span class="token operator">==</span> <span class="token string">'FCFS'</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> FCFS_lt
+    <span class="token keyword">elif</span> method <span class="token operator">==</span> <span class="token string">'SJF'</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> SJF_lt
+    <span class="token keyword">elif</span> method <span class="token operator">==</span> <span class="token string">'HRRN'</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> HRRN_lt
+
+
+<span class="token keyword">def</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    jobs <span class="token operator">=</span> init<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">for</span> method <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token string">'FCFS'</span><span class="token punctuation">,</span> <span class="token string">'SJF'</span><span class="token punctuation">,</span> <span class="token string">'HRRN'</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+        func<span class="token punctuation">(</span>copy<span class="token punctuation">.</span>deepcopy<span class="token punctuation">(</span>jobs<span class="token punctuation">)</span><span class="token punctuation">,</span> method<span class="token punctuation">)</span>
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    main<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre></div><p>运行结果：</p> <div class="language- extra-class"><pre class="language-text"><code>名称：A 到达时间：0     所需时间：4     所需资源：[0, 0, 0, 0, 0, 0]
+名称：B 到达时间：1     所需时间：4     所需资源：[0, 0, 0, 0, 0, 0]
+名称：C 到达时间：2     所需时间：4     所需资源：[0, 0, 0, 0, 0, 0]
+名称：D 到达时间：3     所需时间：3     所需资源：[0, 0, 0, 0, 0, 0]
+名称：E 到达时间：4     所需时间：3     所需资源：[0, 0, 0, 0, 0, 0]
+名称：F 到达时间：5     所需时间：2     所需资源：[0, 0, 0, 0, 0, 0]
+名称：G 到达时间：6     所需时间：2     所需资源：[0, 0, 0, 0, 0, 0]
+名称：H 到达时间：7     所需时间：2     所需资源：[0, 0, 0, 0, 0, 0]
+
+作业A运行时间：4        完成时间：4     周转时间：4     带权周转时间1.0000
+作业B运行时间：4        完成时间：8     周转时间：7     带权周转时间1.7500
+作业C运行时间：4        完成时间：12    周转时间：10    带权周转时间2.5000
+作业D运行时间：3        完成时间：15    周转时间：12    带权周转时间4.0000
+作业E运行时间：3        完成时间：18    周转时间：14    带权周转时间4.6667
+作业F运行时间：2        完成时间：20    周转时间：15    带权周转时间7.5000
+作业G运行时间：2        完成时间：22    周转时间：16    带权周转时间8.0000
+作业H运行时间：2        完成时间：24    周转时间：17    带权周转时间8.5000
+FCFS 的平均周转时间为：11.875   带权平均周转时间：4.740
+
+作业A运行时间：4        完成时间：4     周转时间：4     带权周转时间1.0000
+作业E运行时间：3        完成时间：7     周转时间：3     带权周转时间1.0000
+作业H运行时间：2        完成时间：9     周转时间：2     带权周转时间1.0000
+作业G运行时间：2        完成时间：11    周转时间：5     带权周转时间2.5000
+作业F运行时间：2        完成时间：13    周转时间：8     带权周转时间4.0000
+作业D运行时间：3        完成时间：16    周转时间：13    带权周转时间4.3333
+作业C运行时间：4        完成时间：20    周转时间：18    带权周转时间4.5000
+作业B运行时间：4        完成时间：24    周转时间：23    带权周转时间5.7500
+SJF 的平均周转时间为：9.500     带权平均周转时间：3.010
+
+作业A运行时间：4        完成时间：4     周转时间：4     带权周转时间1.0000
+作业B运行时间：4        完成时间：8     周转时间：7     带权周转时间1.7500
+作业D运行时间：3        完成时间：11    周转时间：8     带权周转时间2.6667
+作业F运行时间：2        完成时间：13    周转时间：8     带权周转时间4.0000
+作业G运行时间：2        完成时间：15    周转时间：9     带权周转时间4.5000
+作业H运行时间：2        完成时间：17    周转时间：10    带权周转时间5.0000
+作业E运行时间：3        完成时间：20    周转时间：16    带权周转时间5.3333
+作业C运行时间：4        完成时间：24    周转时间：22    带权周转时间5.5000
+HRRN 的平均周转时间为：10.500   带权平均周转时间：3.719
+</code></pre></div></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">修改于:</span> <span class="time">8/30/2020, 4:06:23 PM</span></div></footer> <!----> <div data-v-7cfe0aba><section class="page-edit" data-v-7cfe0aba><div id="vcomments" data-v-7cfe0aba></div></section></div></div> <div class="my-main-right"><div style="font-size:14px"><a href="https://me.csdn.net/jaykm" target="_blank">CSDN</a>    
+        <a href="https://github.com/Yiyuery" target="_blank">GitHub</a>   
+        <a href="https://juejin.im/user/5c17f022f265da616c65862f" target="_blank">掘金</a>   
+        <a href="mailto:xiazhaoyang@live.com">邮件</a></div> <div class="my-menu"><h4 style="margin-top: 0;">目录</h4> <a href="/JobSchedulingProgram/#三种调度算法的原理" class="my-menu__lv2">三种调度算法的原理</a><a href="/JobSchedulingProgram/#python-实现" class="my-menu__lv2">Python 实现</a><a href="/JobSchedulingProgram/#jcb-的数据结构" class="my-menu__lv3">JCB 的数据结构</a><a href="/JobSchedulingProgram/#初始化-jcb" class="my-menu__lv3">初始化 JCB</a><a href="/JobSchedulingProgram/#调度算法的实现" class="my-menu__lv3">调度算法的实现</a><a href="/JobSchedulingProgram/#完整代码以及参考资料" class="my-menu__lv2">完整代码以及参考资料</a></div></div></div> </main></div> <div class="footer">
+    © 2019-2020 ❤️ Yiyuery<br> <a href="http://www.beian.miit.gov.cn" target="_blank">皖 ICP 备 19016269 号</a><br> <a href="https://me.csdn.net/jaykm" target="_blank">CSDN</a>    
+    <a href="https://github.com/Xerrors" target="_blank">GitHub</a>   
+    <a href="https://juejin.im/user/5c17f022f265da616c65862f" target="_blank">掘金</a><br> <a href="mailto:xiazhaoyang@live.com">发送邮件</a></div></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.839ced15.js" defer></script><script src="/assets/js/4.3fbc1f96.js" defer></script><script src="/assets/js/33.28affd1f.js" defer></script>
+  </body>
+</html>
